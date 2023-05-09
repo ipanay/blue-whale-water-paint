@@ -1,27 +1,30 @@
 <template>
-  <div id="app">
-    <Menu></Menu>
+  <div>
+    <Header></Header>
+    <router-view></router-view>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
-import Menu from './components/menu'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+
+// import Menu from './components/menu'
 
 export default {
   name: 'App',
   components: {
-    Menu
+    Header,
+    Footer
+    // Menu
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+html,body,h1,h2,h3,h4,h5,h6,p {
+  padding: 0;
+  margin: 0;
 }
 </style>
