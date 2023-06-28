@@ -1,8 +1,9 @@
 <template>
   <div class="myheader">
     <div class="logo-info">
-        <div class="left">
+        <div class="left flex">
             <img class="img" src="http:img/logo.png" alt="">
+            <span class="intro">致力于轻重金属结构的环保涂装<br>推广应用符合国家标准的环保水漆。</span>
         </div>
         <div class="right">
             <div>全国统一服务热线：<span class="phone">17696524266</span></div>
@@ -11,14 +12,14 @@
     </div>
     <div class="nav-container">
         <ul class="nav">
-            <li><router-link class="nav-item" active-class="active" to="/home">网站首页</router-link></li>
-            <li><router-link class="nav-item" to="/home">关于蓝鲸</router-link></li>
-            <li><router-link class="nav-item" to="/home">经典案例</router-link></li>
-            <li><router-link class="nav-item" to="/home">产品中心</router-link></li>
-            <li><router-link class="nav-item" to="/home">新闻资讯</router-link></li>
-            <li><router-link class="nav-item" to="/home">招商加盟</router-link></li>
-            <li><router-link class="nav-item" to="/home">人力资源</router-link></li>
-            <li><router-link class="nav-item" to="/home">联系蓝鲸</router-link></li>
+            <li class="nav-li" v-for="nav in navList" :key="nav.title">
+                <router-link class="nav-item" :class="{active:routeName==nav.name}" :to="nav.to">{{nav.title}}</router-link>
+                <ul class="nav-item-list" v-show="nav.child && nav.child.length" :style="{height:nav.child&&nav.child.length*55}">
+                    <li v-for="navItem in nav.child" :key="navItem.title">
+                        <router-link class="nav-list-item" :to="navItem.to">{{navItem.title}}</router-link>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </div>
     <!-- <el-row :gutter="10">
@@ -31,12 +32,31 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
-    name: 'MyHeader'
+    name: 'MyHeader',
+    data () {
+        return {
+            routeName: ''
+        }
+    },
+    watch: {
+        '$route.name': {
+            handler (name) {
+                this.routeName = name
+            },
+            immediate: true
+        }
+    },
+    computed: {
+        ...mapState(['navList'])
+    },
+    created () {
+    }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .myheader {
     position: absolute;
     width: 100%;
@@ -50,6 +70,19 @@ export default {
             float: left;
             .img {
                 height: 60px;
+            }
+            
+            .intro {
+                display: inline-block;
+                color: #1c499e;
+                font-size: 14px;
+                border-left: 1px solid;
+                padding-left: 10px;
+                margin-left: 10px;
+            }
+            &.flex {
+                display: flex;
+                align-items: center;
             }
         }
         .right {
@@ -69,8 +102,9 @@ export default {
     .nav-container {
         height: 55px;
         padding: 0 50px;
-        background: #101010;
-        color: #fff;
+        background: #fff;
+        // color: #fff;
+        opacity: 0.8;
         line-height: 55px;
         .nav {
             display: flex;
@@ -78,11 +112,43 @@ export default {
             list-style: none;
             margin: 0;
             padding: 0;
-            .nav-item {
-                color: #fff;
-                text-decoration: none;
+            .nav-li {
+                position: relative;
+                .nav-item,.nav-list-item {
+                    color: #333;
+                    text-decoration: none;
+                    &.active, &:hover {
+                            color: #0d68be;
+                        }
+                }
+                .nav-item-list {
+                    display: none;
+                    min-width: 130px;
+                    height: 0!important;
+                    transition: all 2s;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    left: -32px;
+                    position: absolute;
+                    text-align: center;
+                    background: #fff;
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+                    .nav-list-item {
+                        padding: 0 10px;
+                    }
+                }
                 &.active, &:hover {
-                    color: #2213f0;
+                    .nav-item {
+                        color: #0d68be;
+                    }
+                }
+                 &:hover {
+                    .nav-item-list {
+                        height: auto!important;
+                        display: block;
+                    }
                 }
             }
         }

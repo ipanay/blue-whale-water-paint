@@ -48,9 +48,6 @@ export default {
                 { title: '公司简介', main: false, to: '' },
                 { title: '企业文化', main: false, to: '' },
                 { title: '企业优势', main: false, to: '' },
-                { title: '厂房厂貌', main: false, to: '' },
-                { title: '荣誉资质', main: false, to: '' },
-                { title: '团队风采', main: false, to: '' }
             ],
             [
                 { title: '产品展示', main: true, to: '' },
@@ -82,11 +79,6 @@ export default {
                 { title: '招商加盟', main: true, to: '' },
                 { title: '加盟优势', main: false, to: '' },
                 { title: '加盟条件', main: false, to: '' },
-            ],
-            [
-                { title: '人力资源', main: true, to: '' },
-                { title: '人才理念', main: false, to: '' },
-                { title: '在线招聘', main: false, to: '' },
             ],
         ]
     }

@@ -37,7 +37,7 @@ export default {
         this.imgArr = [
             'http:img/scroll/1_scroll.jpg',
             'http:img/scroll/2_scroll.jpg',
-            'http:img/scroll/3_scroll.jpg',
+            // 'http:img/scroll/3_scroll.jpg',
             'http:img/scroll/4_scroll.jpg',
         ]
 
